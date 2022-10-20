@@ -1,11 +1,13 @@
 use crate::models::{Certificate, Subdomain};
 
-pub async fn get_subdomains(domain: &str) -> Result<Vec<Subdomain>, Box<dyn std::error::Error>> {
+// Gets subdomains from crt.sh
+pub async fn get_crt_domains(domain: &str) -> Result<Vec<Subdomain>, Box<dyn std::error::Error>> {
     let certificates: Vec<Certificate> =
         reqwest::get(format!("https://crt.sh/?q={}&output=json", domain))
             .await?
             .json()
             .await?;
+
     let subdomains: Vec<String> = certificates
         .into_iter()
         .flat_map(|cert| {
