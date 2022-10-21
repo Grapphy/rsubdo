@@ -14,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 2 {
-        println!("Not enought arguments: ./main <subdomain>");
+        println!("Not enough arguments: ./rsubdo example.com");
         return Ok(());
     }
 
@@ -45,7 +45,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("{}", sub.url);
     }
 
-    println!("\nScrapped {} domains in {:?}", total, duration);
+    println!(
+        "\nScrapped {} subdomains from {} in {:?}",
+        total, target, duration
+    );
 
     Ok(())
 }
